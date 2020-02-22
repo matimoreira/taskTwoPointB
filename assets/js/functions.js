@@ -11,6 +11,7 @@ function clickHigher() {
 
 	var inputBet = document.getElementById('input--bet');
 	bet = [inputBet.value, 1];
+
 	if (checkCoins()) {
 
 		showCoinsReplics(-bet[0]);
@@ -18,13 +19,12 @@ function clickHigher() {
 		play(showResult);
 	
 	}
-	
-	
 
 }
 
 
 function clickLess() {
+
 	var inputBet = document.getElementById('input--bet');
 	bet = [inputBet.value, 0];
 
@@ -37,6 +37,7 @@ function clickLess() {
 	}
 }
 
+
 function play(callback) {
 
 	var changingNumber = setInterval('setNumber()',100);
@@ -44,11 +45,15 @@ function play(callback) {
 
 }
 
+
 function stopRaffle(changingNumber, callback) {
+
 	clearInterval(changingNumber);
 	var h1Number = document.getElementById('span--number').innerHTML
 	callback(h1Number);
+
 }
+
 
 function showResult(numberWin){
 
@@ -108,8 +113,8 @@ function getProbability(p_number, p_choice){
 
 function showCoinsReplics(profit){
 
-	elementCoins = document.getElementById('span--coins');
-	coins = parseInt(elementCoins.innerHTML) + parseInt(profit);
+	var elementCoins = document.getElementById('span--coins');
+	var coins = parseInt(elementCoins.innerHTML) + parseInt(profit);
 	console.log(parseInt(elementCoins.innerHTML) + ' ' + parseInt(profit));
 	elementCoins.innerHTML = (isNaN(coins)?0:coins);
 
@@ -124,8 +129,9 @@ function setNumber() {
 function checkCoins() {
 	elementCoins = document.getElementById('span--coins');
 	coins = parseInt(elementCoins.innerHTML);
-	if (coins >= bet[0]) {
-		return true
+	console.log(coins +' - ' +  bet[0]);
+	if (coins >= bet[0] && bet[0] > 0) {
+		return true;
 	}
 	return false;
 }
