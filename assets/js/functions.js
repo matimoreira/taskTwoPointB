@@ -7,6 +7,8 @@ document.getElementById('span--number').innerHTML = number;
 
 var bet = []; //coins, choice(0 = less, 1 = higher)
 
+var coins = 100;
+
 function clickHigher() {
 
 	var inputBet = document.getElementById('input--bet');
@@ -70,7 +72,6 @@ function showResult(numberWin){
 
 		}else{
 
-			showCoinsReplics(-profit);
 			console.log('Perdiste ' + bet[0]);
 
 		}
@@ -85,7 +86,6 @@ function showResult(numberWin){
 
 		}else{
 
-			showCoinsReplics(-profit);
 			console.log('Perdiste ' + bet[0]);
 
 		}
@@ -114,11 +114,22 @@ function getProbability(p_number, p_choice){
 function showCoinsReplics(profit){
 
 	var elementCoins = document.getElementById('span--coins');
-	var coins = parseInt(elementCoins.innerHTML) + parseInt(profit);
-	console.log(parseInt(elementCoins.innerHTML) + ' ' + parseInt(profit));
-	elementCoins.innerHTML = (isNaN(coins)?0:coins);
+	coins = coins + profit;
+	console.log(coins + ' ' + parseInt(profit));
+	elementCoins.innerHTML = (isNaN(coins)?0:Math.ceil(coins));
 
 }
+
+
+
+function checkCoins() {
+	console.log(coins +' - ' +  bet[0]);
+	if (Math.ceil(coins) >= bet[0] && bet[0] > 0) {
+		return true;
+	}
+	return false;
+}
+
 
 function setNumber() {
 
@@ -126,15 +137,6 @@ function setNumber() {
 
 }
 
-function checkCoins() {
-	elementCoins = document.getElementById('span--coins');
-	coins = parseInt(elementCoins.innerHTML);
-	console.log(coins +' - ' +  bet[0]);
-	if (coins >= bet[0] && bet[0] > 0) {
-		return true;
-	}
-	return false;
-}
 
 // Retorna un entero aleatorio entre min (incluido) y max (excluido)
 function getRandomInt(min, max) {
